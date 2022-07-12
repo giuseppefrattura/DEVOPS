@@ -1,0 +1,16 @@
+groups:
+  - ubuntu : [root,sys]
+  - hashicorp
+
+users:
+  - default
+  - name : terraform
+    gecos : terraform
+    shell: /bin/bash
+    primary_group : hashicorp
+    sudo : ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    # ssh_import_id
+    lock_password: false
+    ssh_authorized_keys:
+      - ${ssh_key}

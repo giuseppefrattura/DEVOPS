@@ -1,0 +1,31 @@
+- name: "install dipendences"
+  host: all
+  become: yes
+  tasks:
+    - name: "install dipendences for docker"
+      apt: 
+        name: gnupg2
+        state: present
+        update_cache: yes  
+
+
+- name: "install apache"
+  host: all
+  become: yes
+  roles:
+    - geerlingguy.docker
+
+
+  # tasks:
+  #   - name: "install Apache"
+  #     apt: 
+  #       name: apache2
+  #       state: present
+  #       update_cache: yes
+
+- name: "Run docker container"
+  host: all
+  become: yes
+  tasks:
+    - name: "run nginx"
+      shell: "docker run -d -p 80:80 nginx"
